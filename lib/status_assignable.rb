@@ -2,7 +2,7 @@
 
 require_relative 'status_assignable/version'
 
-raise LoadError, 'The project is not a Rails project!' unless defined(Rails)
+raise LoadError, 'The project is not a Rails project!' unless defined?(Rails)
 
 # Allows for soft deletion of records.
 # Include this module in your model to enable soft deletion.
