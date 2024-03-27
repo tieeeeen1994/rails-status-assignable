@@ -59,6 +59,27 @@ my_model.archive # Alias of soft_destroy
 my_model.soft_delete # Directly update the column in the database and also update its associations
 ```
 
+#### Custom Status
+
+You can also add your own status if need be. For example, if you want to add a `pending` status:
+
+```ruby
+class ModelName < ApplicationRecord
+  include StatusAssignable[pending: 3]
+  # ...
+end
+```
+
+This will add a `pending` status for your model. You can then use it like so:
+
+```ruby
+my_model = ModelName.find(1)
+my_model.pending! # Set the status to pending
+my_model.pending? # true
+```
+
+**Take note that the application will raise an exception if the default statuses are overridden. Use different key-value pair for your custom status if that happens.**
+
 ### Associations
 
 Model associations are also supported. For example, if you have a `User` that has many `Post`s and `Comment`s, you can add the following line to the `User` model:
