@@ -1,5 +1,0 @@
-# frozen_string_literal: true
-
-Rails.application.reloader.to_prepare do
-  ActiveRecord::Associations::Builder::Association.singleton_class.prepend StatusAssignable::Association
-end

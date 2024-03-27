@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'status_assignable/version'
-require_relative 'status_assignable/association'
-require_relative 'status_assignable/active_record'
 
 # Allows for soft deletion of records.
 # Include this module in your model to enable soft deletion.
@@ -104,3 +102,5 @@ module StatusAssignable
     end
   end
 end
+
+require_relative 'status_assignable/railtie'
