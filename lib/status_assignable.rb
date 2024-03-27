@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'status_assignable/version'
+require_relative 'status_assignable/association'
 
 # Allows for soft deletion of records.
 # Include this module in your model to enable soft deletion.
@@ -24,7 +25,7 @@ module StatusAssignable
 
   # Allows adding custom statuses to the model's status enum.
   # @param [Hash<Symbol, Integer>] status_dictionary Custom statuses to add.
-  # @return [Models::StatusAssignable] Itself.
+  # @return [StatusAssignable] Itself.
   def self.[](status_dictionary)
     resulting_statuses = DEFAULT_STATUSES.merge(status_dictionary)
     raise ArgumentError, "Default statuses overridden. Don't do this." unless resulting_statuses >= DEFAULT_STATUSES
@@ -38,8 +39,8 @@ module StatusAssignable
 
   included do # rubocop:disable Metrics/BlockLength
     define_callbacks :soft_destroy, scope: %i[kind name]
-    enum status: Models::StatusAssignable.status_dictionary
-    Models::StatusAssignable.clear_dictionary
+    enum status: StatusAssignable.status_dictionary
+    StatusAssignable.clear_dictionary
 
     # Updates the status of the record directly to the database.
     # @return [self, Boolean] Itself if true or false if failed.
