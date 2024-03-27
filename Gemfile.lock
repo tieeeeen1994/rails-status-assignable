@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    status_assignable (0.1.0)
+    status_assignable (0.1.3)
       rails (~> 7.1)
 
 GEM
