@@ -8,13 +8,6 @@ Add this line to your application's Gemfile:
 gem 'status_assignable', '~> 0.1'
 ```
 
-After that, run the following command:
-```bash
-rails g status_assignable_patch
-```
-
-This will install the monkey patcher so that the gem can hook itself properly into the Rails application.
-
 ## Usage
 
 ### Model
@@ -24,6 +17,8 @@ In your model, add the following line:
 ```ruby
 class ModelName < ApplicationRecord
   include StatusAssignable
+  # or
+  has_assignable_status
 
   # ...
 end
@@ -66,6 +61,9 @@ You can also add your own status if need be. For example, if you want to add a `
 ```ruby
 class ModelName < ApplicationRecord
   include StatusAssignable[pending: 3]
+  # or...
+  has_assignable_status pending: 3
+
   # ...
 end
 ```
@@ -86,7 +84,7 @@ Model associations are also supported. For example, if you have a `User` that ha
 
 ```ruby
 class User < ApplicationRecord
-  include StatusAssignable
+  has_assignable_status
 
   has_many :posts, dependent: :destroy, archive: :callbacks
   has_many :comments, dependent: :delete_all, archive: :assign
@@ -105,7 +103,7 @@ There are callback hooks supported for `soft_destroy`: `before_soft_destroy`, `a
 
 ```ruby
 class Post < ApplicationRecord
-  include StatusAssignable
+  has_assignable_status
 
   before_destroy -> { versions.destroy_all }
   before_soft_destroy :update_and_unlink_versions
