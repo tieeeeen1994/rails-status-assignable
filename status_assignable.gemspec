@@ -7,25 +7,19 @@ Gem::Specification.new do |spec|
   spec.version = StatusAssignable::VERSION
   spec.authors = ['Tien']
   spec.email = ['tieeeeen1994@gmail.com']
-
   spec.summary = 'Allows models to be assigned a status.'
-  spec.description = spec.summary
   spec.homepage = 'https://github.com/tieeeeen1994/rails-status-assignable'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.0.0'
-
-  # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
-
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['changelog_uri'] = spec.homepage
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
       (File.expand_path(f) == __FILE__) ||
-        f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
+        f.start_with?(*%w[bin/ spec/ .git .github Gemfile]) ||
+        f.end_with?(*%w[.gem .yml .rspec .gitignore])
     end
   end
   spec.bindir = 'exe'

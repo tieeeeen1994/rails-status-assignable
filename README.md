@@ -5,7 +5,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'status_assignable', git: 'https://github.com/tieeeeen1994/rails-status-assignable'
+gem 'status_assignable', '~> 0.1'
 ```
 
 After that, run the following command:
