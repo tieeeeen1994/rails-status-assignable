@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_record/railtie'
+require 'active_record/associations'
 require_relative 'association'
 require_relative 'active_record'
 
