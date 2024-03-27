@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'status_assignable/monkey_patches'
 require_relative 'status_assignable/version'
 
 # Allows for soft deletion of records.
