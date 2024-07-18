@@ -95,12 +95,18 @@ module StatusAssignable
         archive_procedure = association.options[:archive]
         query = send(association.name)
         case archive_procedure
-        when :callbacks
-          query.respond_to?(:each) ? query.each(&:soft_destroy) : query.soft_destroy
-        when :assign
-          query.respond_to?(:update_all) ? query.update_all(archive_params) : query.update_columns(archive_params)
+        when :callbacks then callbacks_method(query)
+        when :assign then assign_method(query)
         end
       end
+    end
+
+    def callbacks_method(query)
+      query.respond_to?(:each) ? query.each(&:soft_destroy) : query&.soft_destroy
+    end
+
+    def assign_method(query)
+      query.respond_to?(:update_all) ? query.update_all(archive_params) : query&.update_columns(archive_params)
     end
   end
 end
