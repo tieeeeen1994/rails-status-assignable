@@ -40,7 +40,7 @@ module StatusAssignable
 
   included do # rubocop:disable Metrics/BlockLength
     define_callbacks :soft_destroy, scope: %i[kind name]
-    enum status: StatusAssignable.status_dictionary
+    enum :status, StatusAssignable.status_dictionary
     StatusAssignable.clear_dictionary
 
     # Updates the status of the record directly to the database.
