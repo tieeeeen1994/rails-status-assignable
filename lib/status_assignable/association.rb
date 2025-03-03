@@ -10,14 +10,14 @@ module StatusAssignable
     private
 
     def valid_options(options)
-      super(options) + CUSTOM_VALID_OPTIONS
+      super + CUSTOM_VALID_OPTIONS
     end
 
     def define_callbacks(model, reflection)
       if (archive_option_value = reflection.options[:archive])
         check_archive_options(archive_option_value)
       end
-      super(model, reflection)
+      super
     end
 
     def check_archive_options(archive_option_value)
