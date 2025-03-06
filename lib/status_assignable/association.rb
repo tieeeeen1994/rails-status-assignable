@@ -5,7 +5,7 @@ module StatusAssignable
   # The values accepted by the :archive option are :callbacks and :assign.
   module Association
     CUSTOM_VALID_OPTIONS = [:archive].freeze
-    VALID_ARCHIVE_OPTIONS = %i[callbacks assign].freeze
+    VALID_ARCHIVE_OPTIONS = %i[callbacks assign destroy].freeze
 
     private
 

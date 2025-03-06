@@ -97,6 +97,7 @@ module StatusAssignable
         case archive_procedure
         when :callbacks then callbacks_method(query)
         when :assign then assign_method(query)
+        when :destroy then destroy_method(query)
         end
       end
     end
@@ -107,6 +108,10 @@ module StatusAssignable
 
     def assign_method(query)
       query.respond_to?(:update_all) ? query.update_all(archive_params) : query&.update_columns(archive_params)
+    end
+
+    def destroy_method(query)
+      query.respond_to?(:each) ? query.each(&:destroy) : query&.destroy
     end
   end
 end
