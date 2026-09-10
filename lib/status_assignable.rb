@@ -116,7 +116,11 @@ module StatusAssignable
     end
 
     def nullify_method(query, association)
-      query.respond_to?(:update_all) ? query.update_all(association.foreign_key => nil): query&.update_column(association.foreign_key, nil)
+      if query.respond_to?(:update_all)
+        query.update_all(association.foreign_key => nil)
+      else
+        query&.update_column(association.foreign_key, nil)
+      end
     end
   end
 end
