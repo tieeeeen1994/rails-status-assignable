@@ -3,7 +3,7 @@
 module StatusAssignable
   # Integration with ActiveRecord so that the model can simply call has_assignable_status.
   module ActiveRecord
-    def has_assignable_status(custom_statuses = nil) # rubocop:disable Naming/PredicateName
+    def has_assignable_status(custom_statuses = nil) # rubocop:disable Naming/PredicatePrefix
       if custom_statuses.nil?
         include StatusAssignable
       else
