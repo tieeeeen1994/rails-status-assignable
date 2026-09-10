@@ -89,10 +89,11 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy, archive: :callbacks
   has_many :comments, dependent: :delete_all, archive: :assign
   has_many :favorites, dependent: :destroy, archive: :destroy
+  has_many :tasks, dependent: :nullify, archive: :nullify
 end
 ```
 
-The `archive` option can be set to `:callbacks`, `:assign` or `:destroy`. If set to `:callbacks`, the associated records will be archived using `soft_destroy`. If set to `:assign`, the associated records will have their status columns assigned directly. If set to `:destroy`, the associated records will be directly destroyed.
+The `archive` option can be set to `:callbacks`, `:assign`, `:destroy` or `:nullify`. If set to `:callbacks`, the associated records will be archived using `soft_destroy`. If set to `:assign`, the associated records will have their status columns assigned directly. If set to `:destroy`, the associated records will be directly destroyed. If set to `:nullify`, the associated record's foreign key will be set to nil.
 
 It is important that the associations also are `StatusAssignable`!
 
