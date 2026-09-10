@@ -98,6 +98,7 @@ module StatusAssignable
         when :callbacks then callbacks_method(query)
         when :assign then assign_method(query)
         when :destroy then destroy_method(query)
+        when :nullify then nullify_method(query, association)
         end
       end
     end
@@ -112,6 +113,14 @@ module StatusAssignable
 
     def destroy_method(query)
       query.respond_to?(:each) ? query.each(&:destroy) : query&.destroy
+    end
+
+    def nullify_method(query, association)
+      if query.respond_to?(:update_all)
+        query.update_all(association.foreign_key => nil)
+      else
+        query&.update_column(association.foreign_key, nil)
+      end
     end
   end
 end
